@@ -6,4 +6,5 @@
  * To change this template use File | Settings | File Templates.
  */
 public class TermsWithChums {
+    public static void main(String[] args){};
 }
