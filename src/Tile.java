@@ -6,14 +6,14 @@
  * To change this template use File | Settings | File Templates.
  */
 public class Tile {
-    private String letter;
+    private char letter;
     private Integer points;
-    public Tile(String letterForTile, Integer pointsForTile){
+    public Tile(char letterForTile, Integer pointsForTile){
         this.letter = letterForTile;
         this.points = pointsForTile;
     }
 
-    public String getLetter(){
+    public char getLetter(){
         return this.letter;
     };
 

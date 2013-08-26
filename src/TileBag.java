@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,10 +17,29 @@ public class TileBag {
     private Integer numberOfTiles = tileBag.size();
 
     public TileBag(){
-        tileBag.clear();
-        // Read from file and create tiles one-by-one then put into the tileBag likeso:
-        Tile tile = new Tile("e",1);
-        tileBag.add(tileBag.size(), tile);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("/resources/letterFrequencies.txt"));
+            String line;
+            int numberOfTiles;
+            int tilePoints;
+            char tileLetter;
+            tileBag.clear();
+            // Read from file and create tiles one-by-one then put into the tileBag likeso:
+            while((line = br.readLine()) != null){
+
+            }
+            Tile tile = new Tile("e",1);
+            tileBag.add(tileBag.size(), tile);
+
+            br.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
     }
 
     public Tile getTile(String letter){
