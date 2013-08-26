@@ -8,9 +8,6 @@
 public class TermsWithChums {
     public static void main(String[] args){
         Board board = new Board();
-        board.initializeBoard();
-        board.printBoard();
-        board.playWord("hello","right",7,2);
         board.printBoard();
     }
 }
