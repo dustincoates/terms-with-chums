@@ -9,33 +9,19 @@ import java.util.HashMap;
  * To change this template use File | Settings | File Templates.
  */
 public class TileBag {
-    private HashMap<String, ArrayList<Tile>> tileBag = new HashMap<String, ArrayList<Tile>>();
+    private ArrayList<Tile> tileBag = new ArrayList<Tile>();
     private Integer numberOfTiles = tileBag.size();
 
     public TileBag(){
         tileBag.clear();
         // Read from file and create tiles one-by-one then put into the tileBag likeso:
-        ArrayList<Tile> tiles = new ArrayList<Tile>();
         Tile tile = new Tile("e",1);
-        tiles.add(0, tile);
-        tileBag.put("e",tiles);
-        // All "psueo-code" above
+        tileBag.add(tileBag.size(), tile);
     }
 
     public Tile getTile(String letter){
-        Tile tile;
-        if(tileBag.get(letter) == null || tileBag.get(letter).isEmpty()){
-            tile = null;
-            // Maybe this should raise an error?
-        }
-        else{
-            ArrayList tiles = tileBag.get(letter);
-            tiles.size();
-            // This is giving an error, why?
-            tile = tiles.get(0);
-
-        }
-        return tile;
+        int i = (int)(Math.random() * (tileBag.size() + 1 ));
+        return tileBag.get(i);
     };
 
     public Integer getNumberOfTiles(){
