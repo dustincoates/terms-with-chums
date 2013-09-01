@@ -11,6 +11,7 @@ import java.util.Map;
 public class TermsWithChums {
     public static void main(String[] args){
         TileBag tileBag = new TileBag();
+        Dictionary dictionary = new Dictionary();
     }
 };
 
