@@ -45,8 +45,14 @@ public class TileBag {
     }
 
     public Tile getTile(String letter){
-        int i = (int)(Math.random() * (tileBag.size() + 1 ));
-        return tileBag.get(i);
+        if (numberOfTiles == 0){
+            return null;
+        }
+        else{
+            int i = (int)(Math.random() * (tileBag.size() + 1 ));
+            numberOfTiles--;
+            return tileBag.get(i);
+        }
     };
 
     public Integer getNumberOfTiles(){
