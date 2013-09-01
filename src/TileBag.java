@@ -18,7 +18,7 @@ public class TileBag {
 
     public TileBag(){
         try {
-            BufferedReader br = new BufferedReader(new FileReader("/resources/letterFrequencies.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("resources/letterFrequencies.txt"));
             String line;
             int numberOfTiles;
             int tilePoints;
@@ -26,14 +26,16 @@ public class TileBag {
             tileBag.clear();
             // Read from file and create tiles one-by-one then put into the tileBag likeso:
             while((line = br.readLine()) != null){
-
+                String[] lineInfo = line.split(" ");
+                tileLetter = lineInfo[0].charAt(0);
+                numberOfTiles = Integer.parseInt(lineInfo[1]);
+                tilePoints = Integer.parseInt(lineInfo[2]);
+                for (int i = numberOfTiles; i > 0; i--){
+                    Tile tile = new Tile(tileLetter,tilePoints);
+                    tileBag.add(tile);
+                }
             }
-            Tile tile = new Tile("e",1);
-            tileBag.add(tileBag.size(), tile);
-
             br.close();
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (IOException e) {
