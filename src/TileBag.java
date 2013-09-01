@@ -1,3 +1,4 @@
+import javax.swing.text.Style;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,7 +15,6 @@ import java.util.HashMap;
  */
 public class TileBag {
     private ArrayList<Tile> tileBag = new ArrayList<Tile>();
-    private Integer numberOfTiles = tileBag.size();
 
     public TileBag(){
         try {
@@ -41,22 +41,23 @@ public class TileBag {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-
     }
 
-    public Tile getTile(String letter){
-        if (numberOfTiles == 0){
+    public Tile getTile(){
+        if (tileBag.size() == 0){
             return null;
         }
         else{
-            int i = (int)(Math.random() * (tileBag.size() + 1 ));
-            numberOfTiles--;
-            return tileBag.get(i);
+            int i = (int)(Math.random() * (tileBag.size() ));
+            Tile tile = tileBag.get(i);
+            tileBag.remove(i);
+            tileBag.trimToSize();
+            return tile;
         }
     };
 
     public Integer getNumberOfTiles(){
-        return this.numberOfTiles;
+        return tileBag.size();
     };
 
 }
