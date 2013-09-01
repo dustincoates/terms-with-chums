@@ -15,4 +15,4 @@ public class TermsWithChums {
         board.printBoard();
     }
 
-};
+}

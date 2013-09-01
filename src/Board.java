@@ -1,12 +1,5 @@
 import java.util.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Home
- * Date: 8/18/13
- * Time: 6:44 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Board {
     //Constructor
     public Board() {
@@ -34,7 +27,7 @@ public class Board {
         System.out.println("   1    2    3    4    5    6    7    8    9    10   11   12   13   14   15");
         int rowNumber = 1;
         for (int i=0;i<15;i++){
-            ArrayList arrayPlaceHolder = board.get(i);
+            ArrayList<Tile> arrayPlaceHolder = board.get(i);
             if(rowNumber<=9){
                 System.out.print(rowNumber + " ");
             }else{
@@ -43,14 +36,14 @@ public class Board {
             rowNumber ++;
             for(int j=0; j<15;j++){
                 System.out.print(" _");
-                System.out.print(arrayPlaceHolder.get(j));
+                System.out.print(arrayPlaceHolder.get(j).getLetter());
                 System.out.print("_ ");
             }
             System.out.println("\n");
         }
     }
 
-    public void placeTiles(ArrayList tiles, String direction, int row, int column){
+    public void placeTiles(ArrayList<Tile> tiles, String direction, int row, int column){
         //plays word down
         int tilePlaceHolder = 0;
         if(direction.equals("down")){
@@ -68,6 +61,10 @@ public class Board {
         }else{
             System.out.println("Direction Invalid");
         }
+    }
+
+    public void isWord(String word){
+
     }
 
     /*
