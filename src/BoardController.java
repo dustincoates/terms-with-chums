@@ -49,6 +49,7 @@ public class BoardController {
         if(dictionary.checkWord(word)){
             providePointsToUser();
             tilesToPlay.clear();
+//            Then we should put the tiles on the board, mark them as true for played and give more tiles back to user
             return true;
         }
         else{
