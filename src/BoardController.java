@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class BoardController {
     private static BoardController boardController = null;
     private ArrayList<Tile> tilesToPlay = new ArrayList<Tile>();
+    private ArrayList<ArrayList<Integer>> spaces = new ArrayList<ArrayList<Integer>>();
     private String word;
     private Dictionary dictionary = Dictionary.getDictionary();
     private User currentUser;
@@ -22,19 +23,23 @@ public class BoardController {
         return boardController;
     }
 
-    public void playTile(Tile tileToBePlayed){
+    public void playTile(Tile tileToBePlayed, int rowToPlay, int columnToPlay){
         tilesToPlay.add(tileToBePlayed);
+        ArrayList<Integer> space = new ArrayList<Integer>();
+        space.add(rowToPlay);
+        space.add(columnToPlay);
+        spaces.add(space);
     }
 
-    public ArrayList<Tile> getTilesBack(){
+    public void giveTilesBack(){
         ArrayList<Tile> tilesToBeReturned = new ArrayList<Tile>();
         for (int i = 0; i < tilesToPlay.size(); i++){
             if (!tilesToPlay.get(i).getPlayedStatus()){
                 tilesToBeReturned.add(tilesToPlay.get(i));
             }
         }
+        currentUser.addTiles(tilesToBeReturned);
         tilesToPlay.clear();
-        return tilesToBeReturned;
     }
 
     public boolean finalizePlay(){
@@ -42,11 +47,21 @@ public class BoardController {
             word = new StringBuilder().append(tilesToPlay.get(i)).toString();
         }
         if(dictionary.checkWord(word)){
-//          this needs to actually set the word on the board and give points to the user
+            providePointsToUser();
+            tilesToPlay.clear();
             return true;
         }
         else{
+            tilesToPlay.clear();
             return false;
         }
+    }
+
+    private void providePointsToUser(){
+        Integer points = 0;
+        for (int i = 0; i < tilesToPlay.size(); i++){
+            points += tilesToPlay.get(i).getPoints();
+        }
+        currentUser.addPoints(points);
     }
 }

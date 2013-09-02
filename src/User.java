@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class User {
     public String name = "";
     private ArrayList<Tile> tiles = new ArrayList<Tile>();
+    private Integer points = 0;
     public User(String userName){
         name = userName;
     }
@@ -31,4 +32,18 @@ public class User {
         tiles.trimToSize();
         return tile;
     };
+
+    public void addTiles(ArrayList<Tile> tilesToAdd){
+        for (int i = 0; i < tilesToAdd.size(); i++){
+            tiles.add(tilesToAdd.get(i));
+        }
+    }
+
+    public void addPoints(Integer newPoints){
+        points += newPoints;
+    }
+
+    public Integer getPoints(){
+        return points;
+    }
 }
