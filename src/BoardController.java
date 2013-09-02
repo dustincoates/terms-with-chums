@@ -13,6 +13,7 @@ public class BoardController {
     private ArrayList<Tile> tilesToPlay = new ArrayList<Tile>();
     private String word;
     private Dictionary dictionary = Dictionary.getDictionary();
+    private User currentUser;
 
     public static BoardController getBoardController(){
         if (boardController == null){
@@ -21,10 +22,8 @@ public class BoardController {
         return boardController;
     }
 
-    public boolean placeTiles(ArrayList<Tile> tilesToBePlayed){
-        tilesToPlay = tilesToBePlayed;
-
-        return false;
+    public void playTile(Tile tileToBePlayed){
+        tilesToPlay.add(tileToBePlayed);
     }
 
     public ArrayList<Tile> getTilesBack(){
