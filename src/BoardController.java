@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.*;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,18 +17,19 @@ public class BoardController {
     private static ArrayList<User> userList = new ArrayList();
     private static HashMap userScores = new HashMap();
     private static User activeUser = null;
+    private static Dictionary dictionary = Dictionary.getDictionary();
+    private static Board board = new Board();
 
-    private ArrayList<Tile> tilesToPlay = new ArrayList<Tile>();
+    private static ArrayList<Tile> tilesToPlay = new ArrayList<Tile>();
     private ArrayList<ArrayList<Integer>> spaces = new ArrayList<ArrayList<Integer>>();
     private String word;
-    private Dictionary dictionary = Dictionary.getDictionary();
+
 
     //starts a new game
     public static void newGame(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many players?");
         userCount = scanner.nextInt();
-        Board board = new Board();
         for(int i = 0; i<userCount; i++){
             Integer userCount = i + 1;
             User user = new User("Player " + userCount.toString());
@@ -34,7 +37,36 @@ public class BoardController {
             userScores.put(user, 0);
         }
         activeUser = userList.get(0);
+        userPrompt();
     }
+
+    public static void userPrompt(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(activeUser.name + ", enter a letter to be played or 'done' when complete");
+        String inputString = scanner.next();
+        if(!inputString.equals("done")){
+            char charPlay = inputString.charAt(0);
+            System.out.println(activeUser.name + ", enter a row # to play");
+            int row = scanner.nextInt();
+            System.out.println(activeUser.name + ", enter a column # to play");
+            int column = scanner.nextInt();
+            ArrayList<Tile> placeHolderArray = board.getBoard().get(row-1);
+            if(board.checkLetter(charPlay, row, column)){
+                tilesToPlay.add(placeHolderArray.get(column-1));
+            }else if(activeUser.checkLetter(charPlay)){
+                tilesToPlay.add(activeUser.removeTile(charPlay));
+            }
+            userPrompt();
+        }else{
+            //TODO how to determine direction of play?
+            //TODO check if tilesToPlay is word
+            //TODO place tilesToPlay
+            //TODO give user points, changeTurn & userPrompt
+        }
+
+    }
+
+
 
     //changes turn after play, if user is last user, go to user 1
     public static void changeTurn(){
@@ -42,15 +74,6 @@ public class BoardController {
             activeUser = userList.get(0);
         }
         activeUser = userList.get(userList.indexOf(activeUser)+1);
-    }
-
-    //updates scores
-    public static void updateScore(User user, int score){
-        if(userScores.containsKey(user)){
-            userScores.put(user, score);
-        }else{
-            System.out.println("Cannot find that user");
-        }
     }
 
     public static int getUserCount() {
@@ -61,14 +84,9 @@ public class BoardController {
         return userList;
     }
 
-    public static HashMap getUserScores() {
-        return userScores;
-    }
-
     public static User getActiveUser() {
         return activeUser;
     }
-
 
 //    public void playTile(Tile tileToBePlayed, int rowToPlay, int columnToPlay){
 //        tilesToPlay.add(tileToBePlayed);

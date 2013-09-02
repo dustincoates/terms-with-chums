@@ -24,18 +24,33 @@ public class User {
         return tilesString;
     };
 
-    public Tile takeTileFromHand(int i){
-        Tile tile = tiles.get(i);
-        tiles.remove(i);
-        tiles.trimToSize();
-        return tile;
-    };
-
     public void addTiles(ArrayList<Tile> tilesToAdd){
         for (int i = 0; i < tilesToAdd.size(); i++){
             tiles.add(tilesToAdd.get(i));
         }
     }
+
+    public Tile removeTile(char letter){
+        for(int i = 0; i<tiles.size(); i++){
+            if(letter == tiles.get(i).getLetter()){
+                Tile tileToReturn = tiles.get(i);
+                tiles.remove(i);
+                return tileToReturn;
+            }
+        }
+        return null;
+    }
+
+    public boolean checkLetter(char letter){
+        for(int i = 0; i <tiles.size(); i++){
+            if (letter == tiles.get(i).getLetter()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     public void addPoints(Integer newPoints){
         points += newPoints;

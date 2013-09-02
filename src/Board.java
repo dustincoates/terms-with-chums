@@ -8,17 +8,17 @@ public class Board {
     }
 
     private ArrayList<ArrayList> board = new ArrayList(15);
-    private String blankSpace = "_";
+    private Tile blankTile = new Tile('_', 0);
 
     //Creates board with blank spaces
     public void initializeBoard(){
         for(int i = 0; i<15; i++){
-            board.add(i,new ArrayList(15));
+            board.add(i,new ArrayList<Tile>(15));
         }
         for(int i = 0; i<15; i++){
             ArrayList arrayPlaceHolder = board.get(i);
             for(int j = 0; j < 15; j++){
-                arrayPlaceHolder.add(j, blankSpace);
+                arrayPlaceHolder.add(j, blankTile);
             }
         }
     }
@@ -36,7 +36,7 @@ public class Board {
             rowNumber ++;
             for(int j=0; j<15;j++){
                 System.out.print(" _");
-//                System.out.print(arrayPlaceHolder.get(j).getLetter());
+                System.out.print(arrayPlaceHolder.get(j).getLetter());
                 System.out.print("_ ");
             }
             System.out.println("\n");
@@ -48,12 +48,12 @@ public class Board {
         int tilePlaceHolder = 0;
         if(direction.equals("down")){
             for(int i = 0; i<tiles.size();i++){
-                ArrayList arrayPlaceHolder = board.get(row-1+i);
+                ArrayList<Tile> arrayPlaceHolder = board.get(row-1+i);
                 arrayPlaceHolder.set(column, tiles.get(tilePlaceHolder));
                 tilePlaceHolder++;
             }
         }else if(direction.equals("right")){
-            ArrayList arrayPlaceHolder = board.get(row-1);
+            ArrayList<Tile> arrayPlaceHolder = board.get(row-1);
             for(int i=column-1; i<tiles.size(); i++){
                 arrayPlaceHolder.set(i, tiles.get(tilePlaceHolder));
                 tilePlaceHolder++;
@@ -63,28 +63,17 @@ public class Board {
         }
     }
 
-    public void isWord(String word){
-
-    }
-
-    /*
-    public void playWord(String word, String direction, int column, int row){
-        //TODO: Check if player has the chips in word
-        //TODO: Check if word is real word
-        //TODO: Check if word conflicts with other spots on the board
-        char[] wordArray = word.toCharArray();
-
-        if(direction=="down"){
-            for(int i = 0; i < wordArray.length; i++){
-                board.set((15*(row+i-1))+column-1,wordArray[i]);
-                printBoard();
-            }
-        }else if (direction=="right"){
-            for(int i = 0; i < wordArray.length; i++){
-                board.set((15*(row-1))+(column-1+i),wordArray[i]);
-            }
+    public boolean checkLetter(char letter, int row, int column){
+        ArrayList<Tile> arrayPlaceHolder = board.get(row-1);
+        if(arrayPlaceHolder.get(column-1).getLetter() == letter){
+            return true;
+        }else {
+            return false;
         }
     }
-    */
+
+    public ArrayList<ArrayList> getBoard() {
+        return board;
+    }
 }
 
