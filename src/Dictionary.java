@@ -13,6 +13,13 @@ import java.util.ArrayList;
  */
 public class Dictionary {
     private ArrayList<String> words = new ArrayList<String>();
+    private static Dictionary dictionary = null;
+
+    public static Dictionary getDictionary(){
+        if (dictionary == null){dictionary = new Dictionary();};
+        return dictionary;
+    }
+
     public Dictionary(){
         String line;
         try {

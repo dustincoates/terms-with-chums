@@ -8,6 +8,8 @@
 public class Tile {
     private char letter;
     private Integer points;
+    private boolean played;
+
     public Tile(char letterForTile, Integer pointsForTile){
         this.letter = letterForTile;
         this.points = pointsForTile;
@@ -15,9 +17,13 @@ public class Tile {
 
     public char getLetter(){
         return this.letter;
-    };
+    }
 
     public Integer getPoints(){
         return this.points;
-    };
+    }
+
+    public boolean getPlayedStatus(){
+        return played;
+    }
 }

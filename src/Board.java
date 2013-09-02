@@ -36,7 +36,7 @@ public class Board {
             rowNumber ++;
             for(int j=0; j<15;j++){
                 System.out.print(" _");
-                System.out.print(arrayPlaceHolder.get(j).getLetter());
+//                System.out.print(arrayPlaceHolder.get(j).getLetter());
                 System.out.print("_ ");
             }
             System.out.println("\n");
