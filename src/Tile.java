@@ -26,4 +26,8 @@ public class Tile {
     public boolean getPlayedStatus(){
         return played;
     }
+
+    public void setPlayedStatus(){
+        played = true;
+    }
 }

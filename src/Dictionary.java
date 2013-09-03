@@ -25,7 +25,7 @@ public class Dictionary {
         try {
             BufferedReader br = new BufferedReader(new FileReader("resources/words"));
             while((line = br.readLine()) != null){
-                words.add(line);
+                words.add(line.toUpperCase());
             }
             br.close();
         } catch (FileNotFoundException e) {

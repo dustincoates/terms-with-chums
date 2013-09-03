@@ -43,23 +43,11 @@ public class Board {
         }
     }
 
-    public void placeTiles(ArrayList<Tile> tiles, String direction, int row, int column){
-        //plays word down
-        int tilePlaceHolder = 0;
-        if(direction.equals("down")){
-            for(int i = 0; i<tiles.size();i++){
-                ArrayList<Tile> arrayPlaceHolder = board.get(row-1+i);
-                arrayPlaceHolder.set(column, tiles.get(tilePlaceHolder));
-                tilePlaceHolder++;
-            }
-        }else if(direction.equals("right")){
-            ArrayList<Tile> arrayPlaceHolder = board.get(row-1);
-            for(int i=column-1; i<tiles.size(); i++){
-                arrayPlaceHolder.set(i, tiles.get(tilePlaceHolder));
-                tilePlaceHolder++;
-            }
-        }else{
-            System.out.println("Direction Invalid");
+    public void placeTiles(ArrayList<Tile> tiles, ArrayList<ArrayList<Integer>> spaces){
+        for (int i = 0; i < tiles.size(); i++){
+            ArrayList arrayPlaceHolder = board.get(spaces.get(i).get(0) - 1);
+            tiles.get(i).setPlayedStatus();
+            arrayPlaceHolder.set((spaces.get(i).get(1) - 1), tiles.get(i));
         }
     }
 
